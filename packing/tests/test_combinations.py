@@ -2,9 +2,9 @@ from math import comb  # type: ignore
 
 import pytest
 
-from .basket import Item
-from .combinations_v1 import create_all as algorithm1
-from .combinations_v2 import create_all as algorithm2
+from ..basket import Item
+from ..combinations_v1 import create_all as algorithm1
+from ..combinations_v2 import create_all as algorithm2
 
 
 @pytest.fixture
