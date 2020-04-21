@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 
 
@@ -9,3 +9,9 @@ class Item:
 
     def __str__(self):
         return self.name
+
+
+@dataclass
+class Basket:
+    cost: int
+    items: List[Item] = field(default_factory=list)
