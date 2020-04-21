@@ -1,7 +1,7 @@
-# packing-knapsack
+# packing-items
 
-Implementation of knapsack problem with small changes
+Find all options how to select items with given value.
 
 ## Issue to solve:
 
-There are items with given weight and value that should be put into a knapsack with defined weight. Partial items cannot be added to knapsack.
+Find all solutions what can we buy for given amount
