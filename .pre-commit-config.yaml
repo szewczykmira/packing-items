@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: end-of-file-fixer
+  - repo: https://github.com/pre-commit/mirrors-mypy.git
+    rev: v0.770
+    hooks:
+      - id: mypy
+  - repo: https://github.com/asottile/dead.git
+    rev: v1.3.0
+    hooks:
+      - id: dead
+  - repo: https://github.com/psf/black.git
+    rev: 19.10b0
+    hooks:
+      - id: black
+  - repo: https://github.com/timothycrosley/isort.git
+    rev: 4.3.21
+    hooks:
+      - id: isort
