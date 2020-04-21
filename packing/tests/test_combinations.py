@@ -1,21 +1,7 @@
 from math import comb  # type: ignore
 
-import pytest
-
-from ..basket import Item
 from ..combinations_v1 import create_all as algorithm1
 from ..combinations_v2 import create_all as algorithm2
-
-
-@pytest.fixture
-def items():
-    return [
-        Item(1),
-        Item(2),
-        Item(3),
-        Item(4),
-        Item(5),
-    ]
 
 
 def test_generate_all_combinations_returns_proper_amount(items):
