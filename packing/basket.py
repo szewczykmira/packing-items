@@ -4,8 +4,8 @@ from typing import List
 
 @dataclass
 class Item:
-    name: str
     price: int
+    name: str = ""
 
     def __str__(self):
         return self.name
@@ -13,5 +13,10 @@ class Item:
 
 @dataclass
 class Basket:
-    cost: int
+    cost: int = 0
     items: List[Item] = field(default_factory=list)
+
+    def __lshift__(self, other: Item):
+        # usage self << Item
+        self.items.append(other)
+        self.cost += other.price
