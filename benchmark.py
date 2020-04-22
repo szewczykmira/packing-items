@@ -1,6 +1,11 @@
 import timeit
 
-from packing import algorithm_v12, combinations_v1, combinations_v2
+from packing import (
+    algorithm_v3,
+    algorithm_v12,
+    combinations_v1,
+    combinations_v2,
+)
 from packing.basket import Item
 from termcolor import colored
 
@@ -44,12 +49,25 @@ affordable_combinations_v2 = lambda: algorithm_v12.get_affordable_baskets(
 print(
     colored(
         "\t Generating all combinations: {}".format(timeit.timeit(comb_v2, number=3000))
-    )
+    ),
+    "white",
 )
 print(
     colored(
         "\t Generating all combinations and filtering relevant one: {}".format(
             timeit.timeit(affordable_combinations_v2, number=3000)
-        )
+        ),
+        "white",
+    )
+)
+
+print(colored("Lazy implementation", "red"))
+affordable_combinations_v3 = lambda: algorithm_v3.get_affordable_baskets(10, items)
+print(
+    colored(
+        "\t Generating all combinations and filtering relevant one: {}".format(
+            timeit.timeit(affordable_combinations_v3, number=3000)
+        ),
+        "red",
     )
 )
