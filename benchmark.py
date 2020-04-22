@@ -1,8 +1,8 @@
 import timeit
 
-from packing import filter_baskets, itertools, lazy, naive
+from packing import filter_baskets, lazy, naive, with_itertools
 from packing.basket import Item
-from termcolor import colored
+from tabulate import tabulate
 
 items = [
     Item(1),
@@ -12,57 +12,34 @@ items = [
     Item(5),
 ]
 
-print(colored("Most naive version of solution", "yellow"))
-comb_v1 = lambda: naive.create_all(items)
-affordable_combinations_v1 = lambda: filter_baskets.get_affordable_baskets(
-    10, naive.create_all(items)
-)
-print(
-    colored(
-        "\t generating all combinations: {}".format(
-            timeit.timeit(comb_v1, number=3000)
-        ),
-        "yellow",
-    )
-)
-print(
-    colored(
-        "\t generating all combinations and filtering relevant one: {}\n".format(
-            timeit.timeit(affordable_combinations_v1, number=3000,)
-        ),
-        "yellow",
-    )
-)
 
-
-print(colored("Implementation using itertools", "white"))
-comb_v2 = lambda: itertools.create_all(items)
-affordable_combinations_v2 = lambda: filter_baskets.get_affordable_baskets(
-    10, itertools.create_all(items)
-)
-
-print(
-    colored(
-        "\t Generating all combinations: {}".format(timeit.timeit(comb_v2, number=3000))
+HEADERS = [
+    "Name",
+    "Create combinations",
+    "Create combinations and filter out affodable",
+]
+naive_implementation = [
+    "Naive",
+    timeit.timeit(lambda: naive.create_all(items), number=3000),
+    timeit.timeit(
+        lambda: filter_baskets.get_affordable_baskets(10, naive.create_all(items)),
+        number=3000,
     ),
-    "white",
-)
-print(
-    colored(
-        "\t Generating all combinations and filtering relevant one: {}".format(
-            timeit.timeit(affordable_combinations_v2, number=3000)
+]
+with_itertools = [  # type: ignore
+    "Used itertools to generate combinations",
+    timeit.timeit(lambda: with_itertools.create_all(items), number=3000),
+    timeit.timeit(
+        lambda: filter_baskets.get_affordable_baskets(
+            10, with_itertools.create_all(items)
         ),
-        "white",
-    )
-)
-
-print(colored("Lazy implementation", "red"))
-affordable_combinations_v3 = lambda: lazy.get_affordable_baskets(10, items)
-print(
-    colored(
-        "\t Generating all combinations and filtering relevant one: {}".format(
-            timeit.timeit(affordable_combinations_v3, number=3000)
-        ),
-        "red",
-    )
-)
+        number=3000,
+    ),
+]
+lazy = [  # type: ignore
+    "Lazy implementation",
+    "----",
+    timeit.timeit(lambda: lazy.get_affordable_baskets(10, items), number=3000),
+]
+table = tabulate([naive_implementation, with_itertools, lazy], headers=HEADERS)  # type: ignore
+print(table)

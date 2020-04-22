@@ -1,8 +1,8 @@
 import pytest
 
 from ..filter_baskets import get_affordable_baskets
-from ..itertools import create_all
 from ..lazy import get_affordable_baskets as get_affordable_baskets_v3
+from ..with_itertools import create_all
 
 
 @pytest.fixture
