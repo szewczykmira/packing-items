@@ -1,11 +1,6 @@
 import timeit
 
-from packing import (
-    algorithm_v3,
-    algorithm_v12,
-    combinations_v1,
-    combinations_v2,
-)
+from packing import filter_baskets, itertools, lazy, naive
 from packing.basket import Item
 from termcolor import colored
 
@@ -18,9 +13,9 @@ items = [
 ]
 
 print(colored("Most naive version of solution", "yellow"))
-comb_v1 = lambda: combinations_v1.create_all(items)
-affordable_combinations_v1 = lambda: algorithm_v12.get_affordable_baskets(
-    10, combinations_v1.create_all(items)
+comb_v1 = lambda: naive.create_all(items)
+affordable_combinations_v1 = lambda: filter_baskets.get_affordable_baskets(
+    10, naive.create_all(items)
 )
 print(
     colored(
@@ -41,9 +36,9 @@ print(
 
 
 print(colored("Implementation using itertools", "white"))
-comb_v2 = lambda: combinations_v2.create_all(items)
-affordable_combinations_v2 = lambda: algorithm_v12.get_affordable_baskets(
-    10, combinations_v2.create_all(items)
+comb_v2 = lambda: itertools.create_all(items)
+affordable_combinations_v2 = lambda: filter_baskets.get_affordable_baskets(
+    10, itertools.create_all(items)
 )
 
 print(
@@ -62,7 +57,7 @@ print(
 )
 
 print(colored("Lazy implementation", "red"))
-affordable_combinations_v3 = lambda: algorithm_v3.get_affordable_baskets(10, items)
+affordable_combinations_v3 = lambda: lazy.get_affordable_baskets(10, items)
 print(
     colored(
         "\t Generating all combinations and filtering relevant one: {}".format(
